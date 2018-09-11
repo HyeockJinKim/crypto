@@ -56,7 +56,10 @@ void decryptVigenere(char *fileName, const char *key, long fSize) {
             if (*(alpha+i) != ' ' && *(alpha+i) != '\n') {
                 if (*(alpha + i) >= 'a') {  // 소문자 처리
                     *(alpha + i) -= *(key + i) + 'a';
-                    if (*(alpha + i) < 0) {
+                    if (*(alpha + i) < -26) {
+                        *(alpha + i) += 52;
+                        *(alpha + i) += 'a';
+                    } else if (*(alpha + i) < 0) {
                         *(alpha + i) += 26;
                         *(alpha + i) += 'A';
                     } else {
@@ -64,7 +67,10 @@ void decryptVigenere(char *fileName, const char *key, long fSize) {
                     }
                 } else {  // 대문자 처리
                     *(alpha + i) -= *(key + i) + 'A';
-                    if (*(alpha + i) < 0) {
+                    if (*(alpha + i) < -26) {
+                        *(alpha + i) += 52;
+                        *(alpha + i) += 'A';
+                    } else if (*(alpha + i) < 0) {
                         *(alpha + i) += 26;
                         *(alpha + i) += 'a';
                     } else {
